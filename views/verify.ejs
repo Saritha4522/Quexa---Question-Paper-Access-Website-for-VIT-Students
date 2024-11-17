@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>QUEXA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/uploads/webstyles1.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" href="/uploads/Images/logo.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color:#112D4E;
+      background-size: cover;
+      height: 100vh;
+      background-position: center center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      gap: 5%;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .show-images {
+      justify-content: center;
+    }
+
+    .back-button {
+      display: inline-block;
+      text-decoration: none;
+      border: none;
+      background-color: transparent;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .back-button span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #3498db;
+      color: #fff;
+      transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .back-button:hover span {
+      background-color: #2980b9;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .back-icon {
+      margin-right: 4px;
+    }
+
+    .card-container {
+      min-width: 200px;
+    }
+  </style>
+  <script>
+    // Function to reload the page
+    function reloadPage() {
+      // Check the reload count stored in sessionStorage
+      var reloadCount = sessionStorage.getItem('reloadCount') || 0;
+
+      // If the reload count is less than 2, reload the page
+      if (reloadCount < 2) {
+        // Increment the reload count
+        reloadCount++;
+
+        // Store the updated reload count in sessionStorage
+        sessionStorage.setItem('reloadCount', reloadCount);
+
+        // Reload the page
+        location.reload();
+      } else {
+        // Clear the reload count from sessionStorage after 2 reloads
+        sessionStorage.removeItem('reloadCount');
+      }
+    }
+
+    // Call the reloadPage function after the page has loaded
+    window.onload = function () {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("Token does not exist! Redirecting to Home.");
+        window.location.href = "/";
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <header
+      class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-fixed nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+      <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+        <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+      </a>
+
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+          <li class="nav-item">
+            <a href="/" class="nav-link active" style="color:#fff" aria-current="page">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/updatecourse" class="nav-link">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a href="/feedback" class="nav-link">Feedback</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+  </div>
+
+  <div>
+    <h1 style="display: flex; justify-content: center; color: #fff; padding-bottom: 1%; margin-top: 120px;">Verify Posts</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <% posts.forEach(post=> { %>
+        <div class="col-6 col-md-4 col-lg-3 mb-3 mx-auto"> <!-- Adjust the column size based on your preference -->
+          <div class="card-container">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body text-left">
+                <h5 class="card-title">Course Code: <%= post.courseCode %>
+                </h5>
+                <p class="card-text">Exam Date: <%= post.examDate %>
+                </p>
+                <p class="card-text">Slot: <%= post.slot %>
+                </p>
+                <p class="card-text">Type: <%= post.examType %>
+                </p>
+                <div class="text-center">
+                  <button class="btn btn-primary show-images" data-course="<%= post.courseCode %>"
+                    data-date="<%= post.examDate %>" data-slot="<%= post.slot %>"
+                    data-examType="<%= post.examType %>">Show Images</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+    </div>
+  </div>
+  <!-- <div style="text-align:center;">
+    <a href="/" class="back-button">
+      <span>
+        <span class="back-icon">&#9665;</span> 
+      </span>
+    </a>
+  </div> -->
+  <script>
+    const showButtons = document.querySelectorAll(".show-images");
+    showButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const courseCode = button.getAttribute("data-course");
+        const examDate = button.getAttribute("data-date");
+        const slot = button.getAttribute("data-slot");
+        const examType = button.getAttribute("data-examType");
+        window.location.href = `/verify/images?courseCode=${courseCode}&date=${examDate}&slot=${slot}&examType=${examType}`;
+      });
+    });
+  </script>
+  <%- include("partials/footer"); -%>
+</body>
+
+</html>

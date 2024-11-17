@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QUEXA</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/uploads/webstyles1.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="icon" href="/uploads/Images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 150px;
+            height: 40px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header
+            class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-fixed nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+            <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+                <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+            </a>
+    
+            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" style="color:#fff"  aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/upload" class="nav-link">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/search" class="nav-link">Search</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <header
+            class="d-flex flex-wrap justify-content-center py-3 border-bottom nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+            <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+                <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+            </a>
+    
+            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" style="color:#fff"  aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/upload" class="nav-link">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/search" class="nav-link">Download</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
+    <br>
+    
+    
+    <div class="con" style="max-width:95%;">
+    <% if (posts && posts.length > 0) { %>
+        <div class="container">
+            <% posts.forEach(post => { %>
+                <div class="row row-background">
+                    <div class="col d-flex align-items-center"><%= post.courseCode %></div>
+                    <div class="col d-flex align-items-center"><%= post.examType %></div>
+                    <div class="col d-flex align-items-center"><%= post.slot %></div>
+                    <div class="col d-flex align-items-center"><%= post.examDate %></div>
+                    <div class="col btn-container d-flex align-items-center">
+                        <button class="show-images btn btn-primary" data-course="<%= post.courseCode %>"
+                            data-date="<%= post.examDate %>" data-slot="<%= post.slot %>">Show Paper</button>
+                        <button class="download btn btn-primary" onclick="downloadPaper('<%= post.courseCode %>',
+                            '<%= post.examDate %>', '<%= post.slot %>')">Download</button>
+                    </div>
+                </div>
+            <% }); %>
+        </div>        
+    <% } else { %>
+        <h2 style="color:white">No posts found.</h2>
+    <% } %>
+</div>
+    <script>
+        const containerHeight = document.querySelector(".nav").offsetHeight;
+  
+        // Calculate the margin based on the container height (e.g., 20%)
+        const margin = containerHeight;
+  
+        // Add the margin to the .body div
+        const bodyDiv = document.querySelector(".body");
+        bodyDiv.style.paddingTop = `${margin}px`;
+
+      </script>
+
+    <script>
+        const showButtons = document.querySelectorAll(".show-images");
+        showButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const courseCode = button.getAttribute("data-course");
+                const examDate = button.getAttribute("data-date");
+                const slot = button.getAttribute("data-slot");
+                window.location.href = `/display/images?courseCode=${courseCode}&date=${examDate}&slot=${slot}`;
+
+            });
+        });
+    </script>
+    <script>
+        function downloadPaper(courseCode, examDate, slot) {
+            const form = document.createElement('form');
+            form.action = '/download';
+            form.method = 'post';
+    
+            const courseCodeInput = document.createElement('input');
+            courseCodeInput.type = 'hidden';
+            courseCodeInput.name = 'courseCode';
+            courseCodeInput.value = courseCode;
+    
+            const examDateInput = document.createElement('input');
+            examDateInput.type = 'hidden';
+            examDateInput.name = 'examDate';
+            examDateInput.value = examDate;
+    
+            const slotInput = document.createElement('input');
+            slotInput.type = 'hidden';
+            slotInput.name = 'slot';
+            slotInput.value = slot;
+    
+            form.appendChild(courseCodeInput);
+            form.appendChild(examDateInput);
+            form.appendChild(slotInput);
+    
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+    
+    <%- include("partials/footer"); -%>
+</body>
+
+</html>

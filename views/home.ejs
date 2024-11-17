@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEXA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/uploads/webstyles.css" />
+    <link rel="icon" href="/uploads/Images/logo.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+        .navbar-toggler .icon-bar {
+            background-color: #fff !important;
+            display: block;
+            width: 25px;
+            height: 2px;
+            border-radius: 1px;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30'%3e%3cpath stroke='rgba(255, 255, 255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header
+            class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-fixed nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+            <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+                <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+            </a>
+
+            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" style="color:#fff" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" class="nav-link" onclick="showFeedbackPopup()">Feedback</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+    </div>
+
+    <div class="body d-flex flex-row justify-content-center">
+        <div class="flexible-body">
+            <div class="card-image">
+                <img src="/uploads/Images/conversationimage.jpg" alt="Card Image" class="card-image" />
+            </div>
+            <div class="flex-body-buttons d-flex justify-content-center">
+                <div class="card-buttons upload mb-3">
+                    <a href="/upload" class="button-link">
+                        <img src="uploads/Images/upload.png" alt="Upload Image" class="button-image" />
+                        <h3>Upload</h3>
+                    </a>
+                </div>
+                <div class="card-buttons download mt-3">
+                    <a href="/search" class="button-link">
+                        <img src="uploads/Images/download.png" alt="Search Image" class="button-image" />
+                        <h3>Search</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="download-rating d-flex flex-wrap justify-content-around">
+        <div class="downloads-ratings-item" id="downloadsItem">
+            <h3>Downloads:<%= totalDownloads %>
+            </h3>
+        </div>
+        <div class="downloads-ratings-item" id="ratingsItem">
+            <h3>Rating:<%= averageRating %>
+            </h3>
+        </div>
+        <div class="downloads-ratings-item" id="totalItem">
+            <h3>Papers Available:<%= totalUniquePosts %>
+            </h3>
+        </div>
+    </div>
+
+    <!-- Feedback Popup -->
+    <%- include("partials/feedback"); -%>
+
+    <script>
+        const containerHeight = document.querySelector(".nav").offsetHeight;
+
+        // Calculate the margin based on the container height (e.g., 20%)
+        const margin = containerHeight;
+
+        // Add the margin to the .body div
+        const bodyDiv = document.querySelector(".body");
+        bodyDiv.style.paddingTop = `${margin}px`;
+    </script>
+    <div id="contact" style="margin: 5%;">
+        <div>
+            <h2 style="color: black; font-weight: bold; font-size: 30px; text-align: center; padding: 3%;">We're here to help you excel</h2>
+        </div>
+        <div class="my-div2" style="padding: 3%;">
+            <h2 style="font-size: 26px;">Reach out and let's make your academic journey seamless.</h2>
+            <h4 style="color: rgb(111, 30, 120); font-size: 19px; font-style: italic; font-weight: bold;">"Download, Success and
+                Repeat with Quexa"</h4>
+            <div class="email-contact d-flex flex-row justify-content-around">
+                <a href="mailto:quexa@gmail.com" style="text-decoration: none;" class="nav-link"><img src="https://www.iconpacks.net/icons/2/free-mail-icon-2569-thumb.png" alt="Mail" height="30em"></a>
+                <a href="mailto:quexa@gmail.com" style="color: black; font-weight: 600;">quexa@gmail.com</a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="d-flex flex-row justify-content-center">
+        <div id="contact-us" class="my-div d-flex flex-row justify-content-center">
+            <div class="my-div1 d-flex flex-column justify-content-center">
+                <div>
+                    <h2 style="color: black; font-weight: bold; font-size: 30px;">We're here to help you excel</h2>
+                </div>
+                <h2>We're here to help you excel</h2> 
+                <div class="my-div2">
+                    <h2 style="font-size: 26px;">Reach out and let's make your academic journey seamless.</h2>
+                    <h4 style="color: rgb(111, 30, 120); font-size: 19px; font-style: italic; font-weight: bold;">"Download, Success and
+                        Repeat with Quexa"</h4>
+                    <div class="email-contact d-flex flex-row justify-content-around">
+                        <a href="mailto:quexa@gmail.com" style="text-decoration: none;" class="nav-link"><img src="https://www.iconpacks.net/icons/2/free-mail-icon-2569-thumb.png" alt="Mail" height="30em"></a>
+                        <a href="mailto:quexa@gmail.com">quexa@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+    
+
+    <!--Guidelines-->
+    <!-- <div id="about-quexa" class="rules">
+        <div id="outer">
+            <div id="inner">
+                <div class="Heading">
+                    <h1 style="text-align:center;">About Quexa!</h1>
+                </div>
+                <br>
+                <div class="about-quexa">
+                    <h4 style="text-align:center;color: white;">Welcome to Quexa, your academic sanctuary for
+                        streamlined access to a treasure trove of question papers! 🎓✨</h4>
+                    <br>
+                    <div class="Sub-Headings">
+                        <h4 style="text-align:left;">Rules and Guidelines</h3>
+                            <br>
+                            <div class="Content2">
+                                <h5 class="point-button" id="point1">Purpose</h5>
+                                <p class="point-content"> The primary goal is to facilitate the downloading of question
+                                    papers to our VIT-AP Community.</p>
+
+                                <h5 class="point-button" id="point1">Upholding Standards</h5>
+                                <p class="point-content"> Uphold the decorum and academic integrity by submitting
+                                    accurate and relevant question papers.</p>
+
+                                <h5 class="point-button" id="point1">Downloading Process</h5>
+                                <p class="point-content"> Click the Download button, fill in required details, and press
+                                    download.</p>
+
+                                <h5 class="point-button" id="point1">Quality Assurance</h5>
+                                <p class="point-content"> All uploaded question papers will undergo thorough
+                                    verification before being made accessible. This ensures the integrity and
+                                    reliability of the content.</p>
+
+                                <h5 class="point-button" id="point1">Verification Process</h5>
+                                <p class="point-content"> Our team will review each question paper to maintain the
+                                    highest standards. Expect a brief waiting period as part of this verification
+                                    process.</p>
+
+                                <h5 class="point-button" id="point1">Accountability</h5>
+                                <p class="point-content"> Contributors play a crucial role in maintaining the quality of
+                                    the platform. Take responsibility for the content you share, fostering a trustworthy
+                                    environment.</p>
+
+                                <h5 class="point-button" id="point1">Community Involvement</h5>
+                                <p class="point-content"> Contribute by sharing question papers with fellow students.
+                                </p>
+
+                                <h5 class="point-button" id="point1">Developer Status</h5>
+                                <p class="point-content"> Developers are beginners; patience is appreciated.</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!--Script-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1"></script>
+    <script>
+        function showFeedbackPopup() {
+            document.getElementById("feedback-popup").style.display = "block";
+        }
+
+        function closeFeedbackPopup() {
+            document.getElementById("feedback-popup").style.display = "none";
+        }
+    </script>
+
+
+</body>
+
+</html>

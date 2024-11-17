@@ -1,0 +1,64 @@
+<%- include("partials/header"); -%>
+<style>
+.d-flex-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+    }
+
+    .card-buttons {
+        padding: 30px;
+        width: 200px;
+        text-align: center;
+        background-color: #3F72AF;
+        border-radius: 10px;
+        margin: 20px; 
+    }
+.download{
+    background-color: #3F72AF;
+    border-radius: 10px;
+    /* grid-area: 2/2/3/3; */
+}
+a{
+    text-decoration: none;
+}
+.button-link h3{
+    justify-content: space-around;
+    color: white;
+}
+
+
+</style>
+<script>
+    window.onload = function () {
+        const token = '<%= token %>';
+        localStorage.setItem('token', token);
+    };
+</script>
+<body>
+    <div class="d-flex-center align-items-center">
+        <div class="card-buttons download">
+            <a href="/" class="button-link">    
+                <h3>Home</h3>
+            </a>
+        </div>
+        <div class="card-buttons download">
+            <a href="/verify" class="button-link">    
+                <h3>Verify</h3>
+            </a>
+        </div>
+        <div class="card-buttons download">
+            <a href="/feedback" class="button-link">    
+                <h3>Feedback</h3>
+            </a>
+        </div>
+        <div class="card-buttons download">
+            <a href="/updatecourse" class="button-link">    
+                <h3>Courses</h3>
+            </a>
+        </div>
+    </div>
+</body>
+<%- include("partials/footer"); -%>

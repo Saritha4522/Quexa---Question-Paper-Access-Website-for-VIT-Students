@@ -1,0 +1,72 @@
+<%- include("partials/header"); -%>
+<style>
+    .navbar-toggler .icon-bar {
+            background-color: #fff !important;
+            display: block;
+            width: 25px;
+            height: 2px;
+            border-radius: 1px;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30'%3e%3cpath stroke='rgba(255, 255, 255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+</style>
+<script>
+    
+        window.onload = function () {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Token does not exist! Redirecting to Home.");
+            window.location.href = "/";
+        }
+    };
+</script>
+<body>
+    <div class="container" style="margin-bottom: 130px;">
+        <header
+            class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-fixed nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+            <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+                <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+            </a>
+
+            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" style="color:#fff" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/verify" class="nav-link">Verify</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/updatecourse" class="nav-link">Courses</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+</div>
+    <% feeds.forEach(feed => { %>
+    <div class="feed d-flex flex-column justify-content-center" style="width:auto; margin:2%; padding: 1%; font-size: medium;">
+        <p class="feed-regdno">Registration Number: <%= feed.regdNumber %></p>
+        <p class="feed-name">Name: <%= feed.name %></p>
+        <p class="feed-rating">Rating: <%= feed.rating %></p>
+        <p class="feed-feedback">Feedback: <%= feed.feedback %></p>
+    </div>
+    <form action="/feed-seen" method="post">
+        <input type="hidden" name="id" value="<%= feed._id %>">
+        <div>
+            <button type="submit" name="action" value="Seen" style="width:100px; color: white; border-radius: 10px; margin:0 0 0 2% ">Seen</button>
+        </div>
+    </form>
+
+    <% }); %>
+    <!-- <a href="/">Back to Home</a> -->
+<%- include("partials/footer"); -%>

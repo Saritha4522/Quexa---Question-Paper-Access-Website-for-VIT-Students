@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QUEXA</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/uploads/webstyles1.css" />
+    <link rel="icon" href="/uploads/Images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        #currentPage,
+        #totalPages,
+        .pagination-divider {
+            font-size: 1em;
+            color: white;
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            background-image: url("/uploads/Images/bg1.avif");
+            background-size: cover;
+            height: 100vh;
+            background-position: center center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .info-container {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        .paper-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+
+        .paper {
+            max-width: auto;
+            max-height: 80vh;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .paper.active {
+            display: block;
+        }
+
+        .paper img {
+            max-width: auto;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            font-size: 1.1rem;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: row;
+            background-color: transparent;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 767px) {
+            .info-container {
+                flex-direction: column;
+            }
+        }
+
+        .info-item {
+            display: flex;
+            background-color: #fff;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .pagination .pagination-text {
+            flex: 1;
+            text-align: center;
+            /* Center-align the text */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header id="mainHeader"
+            class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-fixed nav navbar navbar-expand-md navbar-light bg-light border-bottom">
+            <a href="/" class="navbar-brand d-flex me-auto me-md-0 link-body-emphasis text-decoration-none">
+                <span class="fs-4"><img src="/uploads/Images/logo_bg.png" class="logo" alt="Quexa Logo" /></span>
+            </a>
+    
+            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" style="color:#fff"  aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:history.back()" class="nav-link">Back</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/search" class="nav-link">Search</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- <div class="info-container d-flex justify-content-center">
+            <div class="info-item">
+                <p><%= courseCode %>
+                </p>
+            </div>
+            <div class="info-item">
+                <p><%= examDate %>
+                </p>
+            </div>
+            <div class="info-item">
+                <p><%= slot %>
+                </p>
+            </div>
+        </div> -->
+
+        <div class="paper-container">
+            <% images.forEach((image, index)=> { %>
+                <div class="paper <%= index === 0 ? 'active' : '' %>">
+                    <img src="<%= image %>" alt="Image">
+                </div>
+                <% }); %>
+        </div>
+
+        <div class="pagination">
+            <button class="btn btn-primary mr-2" onclick="movePage(-1)" id="previousPageBtn">&lt; Previous</button>
+            <span id="currentPage">1</span>
+            <span class="pagination-divider"> / </span>
+            <span id="totalPages">
+                <%= images.length %>
+            </span>
+            <button class="btn btn-primary ml-2" onclick="movePage(1)" id="nextPageBtn">Next &gt;</button>
+        </div>
+
+
+        <form action="/download" method="post">
+            <input type="hidden" name="courseCode" value="<%= courseCode %>">
+            <input type="hidden" name="examDate" value="<%= examDate %>">
+            <input type="hidden" name="slot" value="<%= slot %>">
+            <button class="btn btn-primary" type="submit">Download</button>
+        </form>
+
+    </div>
+
+    <script>
+        // Add this script to calculate and set the margin for info-container
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the header element by its id
+            const header = document.getElementById('mainHeader');
+
+            // Get the computed height of the header
+            const headerHeight = window.getComputedStyle(header).height;
+
+            // Apply the calculated height as margin to the info-container
+            const infoContainer = document.querySelector('.paper-container');
+            infoContainer.style.marginTop = headerHeight;
+        });
+    </script>
+    <script>
+        let currentPage = 1;
+        const totalPages = document.getElementById('totalPages').innerText;
+        function movePage(direction) {
+            currentPage += direction;
+            if (currentPage < 1) {
+                currentPage = 1;
+            } else if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+
+            showPage(currentPage);
+        }
+
+        function showPage(page) {
+            const papers = document.querySelectorAll('.paper');
+            papers.forEach((paper, index) => {
+                if (index === page - 1) {
+                    paper.classList.add('active');
+                } else {
+                    paper.classList.remove('active');
+                }
+            });
+
+            document.getElementById('currentPage').innerText = currentPage;
+        }
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
